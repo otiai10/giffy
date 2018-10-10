@@ -19,6 +19,8 @@ Encoded successfully: animated.gif
 %
 ```
 
+<img src="https://raw.githubusercontent.com/otiai10/giffy/master/example/animated.gif" width="40%" />
+
 ```
 % giffy -h
 Usage of giffy:
