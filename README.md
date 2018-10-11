@@ -1,28 +1,29 @@
 # Create Animated GIF
 
+Install
+
 ```sh
 % go get -u github.com/otiai10/giffy
 ```
 
+Example
+
 ```sh
 % giffy -i 'example/*.png'
-Decoding example/01.png
-Decoding example/02.png
-Decoding example/03.png
-Decoding example/04.png
-Decoding example/05.png
-Decoding example/06.png
-Decoding example/07.png
-Decoding example/08.png
-Decoding example/09.png
-Encoded successfully: animated.gif
+9 files found. Decoding...
+✔ ✔ ✔ ✔ ✔ ✔ ✔ ✔ ✔
+Encoded successfully to animated.gif
 %
 ```
 
+Output
+
 <img src="https://raw.githubusercontent.com/otiai10/giffy/master/example/animated.gif" width="40%" />
 
+Options
+
 ```
-% giffy -h
+$ giffy -h
 Usage of giffy:
   -delay int
     	Delay in milliseconds (default 1000)

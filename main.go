@@ -7,6 +7,7 @@ import (
 	"image/draw"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/otiai10/debug"
 
@@ -38,15 +39,26 @@ func main() {
 		debug.Println(err)
 		return
 	}
+	if len(matches) == 0 {
+		fmt.Printf("No files found with `%v`", input)
+		return
+	}
+	fmt.Printf("%d files found. Decoding...\n", len(matches))
 
 	g := &gif.GIF{LoopCount: loop}
 
 	for _, name := range matches {
-		if err := push(name, g); err != nil {
+		fmt.Print(name)
+		if err := push(g, name); err != nil {
 			debug.Println(err)
 			return
 		}
+		fmt.Printf("\033[%dD", len(name))
+		fmt.Print(strings.Repeat(" ", len(name)))
+		fmt.Printf("\033[%dD", len(name))
+		fmt.Printf("✔ ")
 	}
+	fmt.Print("\n")
 
 	f, err := os.Create(output)
 	if err != nil {
@@ -59,11 +71,11 @@ func main() {
 		return
 	}
 
-	fmt.Println("Encoded successfully:", output)
+	fmt.Println("Encoded successfully to", output)
 }
 
-func push(filename string, dest *gif.GIF) error {
-	fmt.Println("Decoding", filename)
+func push(dest *gif.GIF, filename string) error {
+
 	f, err := os.Open(filename)
 	if err != nil {
 		return err
