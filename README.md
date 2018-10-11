@@ -1,12 +1,16 @@
-# Create Animated GIF
+# giffy: Create Animated GIF
 
-Install
+[![Build Status](https://travis-ci.org/otiai10/giffy.svg?branch=master)](https://travis-ci.org/otiai10/giffy)
+[![codecov](https://codecov.io/gh/otiai10/giffy/branch/master/graph/badge.svg)](https://codecov.io/gh/otiai10/giffy)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+# Install
 
 ```sh
 % go get -u github.com/otiai10/giffy
 ```
 
-Example
+# Example
 
 ```sh
 % giffy -i 'example/*.png'
@@ -20,7 +24,7 @@ Output
 
 <img src="https://raw.githubusercontent.com/otiai10/giffy/master/example/animated.gif" width="40%" />
 
-Options
+# Options
 
 ```
 $ giffy -h
