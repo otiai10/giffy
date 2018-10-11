@@ -22,6 +22,7 @@ var (
 	output string
 	loop   int
 	delay  int
+	quiet  bool
 )
 
 func init() {
@@ -29,10 +30,13 @@ func init() {
 	flag.StringVar(&output, "o", "animated.gif", "Output file name")
 	flag.IntVar(&loop, "loop", 0, "Loop count (0 == infinite)")
 	flag.IntVar(&delay, "delay", 1000, "Delay in milliseconds")
+	flag.BoolVar(&quiet, "quiet", false, "Do not output verbose log")
 	flag.Parse()
 }
 
 func main() {
+
+	lg := logger{quiet}
 
 	matches, err := filepath.Glob(input)
 	if err != nil {
@@ -40,25 +44,25 @@ func main() {
 		return
 	}
 	if len(matches) == 0 {
-		fmt.Printf("No files found with `%v`", input)
+		lg.Printf("No files found with `%v`", input)
 		return
 	}
-	fmt.Printf("%d files found. Decoding...\n", len(matches))
+	lg.Printf("%d files found. Decoding...\n", len(matches))
 
 	g := &gif.GIF{LoopCount: loop}
 
 	for _, name := range matches {
-		fmt.Print(name)
+		lg.Printf(name)
 		if err := push(g, name); err != nil {
 			debug.Println(err)
 			return
 		}
-		fmt.Printf("\033[%dD", len(name))
-		fmt.Print(strings.Repeat(" ", len(name)))
-		fmt.Printf("\033[%dD", len(name))
-		fmt.Printf("✔ ")
+		lg.Printf("\033[%dD", len(name))
+		lg.Printf(strings.Repeat(" ", len(name)))
+		lg.Printf("\033[%dD", len(name))
+		lg.Printf("✔ ")
 	}
-	fmt.Print("\n")
+	lg.Printf("\n")
 
 	f, err := os.Create(output)
 	if err != nil {
@@ -71,7 +75,7 @@ func main() {
 		return
 	}
 
-	fmt.Println("Encoded successfully to", output)
+	lg.Printf("Encoded successfully to %s\n", output)
 }
 
 func push(dest *gif.GIF, filename string) error {
@@ -90,4 +94,15 @@ func push(dest *gif.GIF, filename string) error {
 	dest.Image = append(dest.Image, p)
 	dest.Delay = append(dest.Delay, delay/10)
 	return nil
+}
+
+type logger struct {
+	quiet bool
+}
+
+func (l logger) Printf(format string, v ...interface{}) {
+	if quiet {
+		return
+	}
+	fmt.Printf(format, v...)
 }

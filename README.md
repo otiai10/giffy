@@ -33,4 +33,6 @@ Usage of giffy:
     	Loop count (0 == infinite)
   -o string
     	Output file name (default "animated.gif")
+  -quiet
+      Do not output verbose log
 ```
