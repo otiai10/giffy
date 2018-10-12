@@ -21,4 +21,21 @@ func TestRun(t *testing.T) {
 		Expect(t, err).Not().ToBe(nil)
 	})
 
+	When(t, "invalid formatted image specified", func(t *testing.T) {
+		opt := &options{
+			input: "./test/data/case01/*.txt",
+		}
+		err := run(opt)
+		Expect(t, err).Not().ToBe(nil)
+	})
+
+	When(t, "output location not permitted", func(t *testing.T) {
+		opt := &options{
+			input:  "./test/data/case00/01.png",
+			output: "/root",
+		}
+		err := run(opt)
+		Expect(t, err).Not().ToBe(nil)
+	})
+
 }
