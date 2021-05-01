@@ -1,6 +1,6 @@
 # giffy: Create Animated GIF
 
-[![Build Status](https://travis-ci.org/otiai10/giffy.svg?branch=master)](https://travis-ci.org/otiai10/giffy)
+[![Go](https://github.com/otiai10/giffy/actions/workflows/go.yml/badge.svg)](https://github.com/otiai10/giffy/actions/workflows/go.yml)
 [![codecov](https://codecov.io/gh/otiai10/giffy/branch/master/graph/badge.svg)](https://codecov.io/gh/otiai10/giffy)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
