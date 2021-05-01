@@ -1,3 +1,4 @@
 animated*.gif
 !.gitkeep
 coverage.txt
+vendor
